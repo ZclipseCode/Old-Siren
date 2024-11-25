@@ -13,7 +13,8 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
 
-        <script src="js/script.js" type="module"></script>
+        <script src="js/jquery-3.7.1.min.js"></script>
+        <script src="js/indexScript.js" type="module"></script>
     </head>
     <body id="page-top">
         <!-- Header-->
@@ -22,7 +23,7 @@
                 <div class="container px-5">
                     <h1 class="masthead-heading mb-0">Siren</h1>
                     <h2>Discover music you like near you!</h2>
-                    <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Login to Spotify</a>
+                    <a id='start' class="btn btn-primary btn-xl rounded-pill mt-5">Start</a>
                 </div>
             </div>
             <div class="bg-circle-1 bg-circle"></div>
@@ -30,23 +31,6 @@
             <div class="bg-circle-3 bg-circle"></div>
             <div class="bg-circle-4 bg-circle"></div>
         </header>
-
-        <div>
-            <h1>Display your Spotify profile data</h1>
-
-            <section id="profile">
-            <h2>Logged in as <span id="displayName"></span></h2>
-            <span id="avatar"></span>
-            <ul>
-                <li>User ID: <span id="id"></span></li>
-                <li>Email: <span id="email"></span></li>
-                <li>Spotify URI: <a id="uri" href="#"></a></li>
-                <li>Link: <a id="url" href="#"></a></li>
-                <li>Profile Image: <span id="imgUrl"></span></li>
-            </ul>
-            </section>
-        </div>
-
         <!-- Footer-->
         <footer class="py-5 bg-black">
             <p class="m-0 text-center text-white small">&copy;<script>document.write(new Date().getFullYear())</script> Brian Michael</p>
