@@ -16,8 +16,10 @@ async function start(){
     }
     else {
         accessToken = getAccessTokenFromUrl();
-        let topTracks = await fetchTopTracks(accessToken);
-        console.log(topTracks);
+        let topArtists = await fetchTopArtists(accessToken);
+        
+        sessionStorage.setItem("topArtists", JSON.stringify(topArtists));
+        window.location.href = 'music-taste.html';
     }
 }
 
@@ -27,10 +29,10 @@ function getAccessTokenFromUrl() {
     return params.get('access_token');
 }
 
-async function fetchTopTracks(accessToken) {
+async function fetchTopArtists(accessToken) {
     const limit = 50;
     const response = await fetch(
-        `https://api.spotify.com/v1/me/top/tracks?limit=${limit}`,
+        `https://api.spotify.com/v1/me/top/artists?limit=${limit}`,
         {
             method: 'GET',
             headers: {
