@@ -46,3 +46,7 @@ $(document).ready(function() {
     setGenresElement('genres');
     sessionStorage.setItem('genres', JSON.stringify(sortedGenres))
 });
+
+$('#find-concerts').click(function() {
+    window.location.href = 'find-concerts.html';
+});

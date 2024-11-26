@@ -10919,3 +10919,15 @@ header.masthead .bg-circle-4 {
     font-size: 4rem;
   }
 }
+
+/**/
+
+img.event-image {
+  width: 300px;
+  height: auto;
+}
+
+div.event-info {
+  width: 300px;
+  height: auto;
+}
