@@ -12,6 +12,9 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+
+        <script src="js/jquery-3.7.1.min.js"></script>
+        <script src="js/find-concerts-script.js" type="module"></script>
     </head>
     <body id="page-top">
         <section>
@@ -22,22 +25,25 @@
                         <form>
                             <div style="display: flex; align-items: center; justify-content: space-around;">
                                 <div>
-                                    <label for="locations">Location:</label>
-                                    <select name="locations">
-                                        <option value="chicago">Chicago, IL</option>
-                                        <option value="new-york">New York City, NY</option>
-                                        <option value="austin">Austin, TX</option>
-                                        <option value="nashville">Nashville, TN</option>
-                                        <option value="los-angeles">Los Angeles, CA</option>
-                                        <option value="san-francisco">San Francisco, CA</option>
-                                        <option value="seattle">Seattle, WA</option>
-                                        <option value="boston">Boston, MA</option>
-                                        <option value="memphis">Memphis, TN</option>
+                                    <label for="location">Location:</label>
+                                    <select id="location" name="location">
+                                        <option value="41.878,-87.630">Chicago, IL</option>
+                                        <option value="40.713,-74.006">New York City, NY</option>
+                                        <option value="30.267,-97.743">Austin, TX</option>
+                                        <option value="36.163,-86.782">Nashville, TN</option>
+                                        <option value="34.055,-118.243">Los Angeles, CA</option>
+                                        <option value="37.775,-122.419">San Francisco, CA</option>
+                                        <option value="47.606,-122.333">Seattle, WA</option>
+                                        <option value="42.360,-71.059">Boston, MA</option>
+                                        <option value="35.150,-90.049">Memphis, TN</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label for="radius">Radius:</label>
-                                    <input type="number" name="radius">
+                                    <input id="radius" type="number" name="radius" value="50">
+                                </div>
+                                <div>
+                                    <button id="search" type="button" class="btn btn-dark">Search</button>
                                 </div>
                             </div>
                         </form>
@@ -52,7 +58,5 @@
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
     </body>
 </html>

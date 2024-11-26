@@ -44,4 +44,5 @@ $(document).ready(function() {
     setGenreOccurences();
     setSortedGenres();
     setGenresElement('genres');
+    sessionStorage.setItem('genres', JSON.stringify(sortedGenres))
 });
