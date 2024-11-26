@@ -2,6 +2,7 @@ const clientId = import.meta.env.VITE_CLIENT_ID;
 
 var accessToken;
 
+const startUrl = "http://localhost:5173";
 const redirectUri = "http://localhost:5173/callback";
 const scope = "user-top-read";
 const authUrl = 'https://accounts.spotify.com/authorize?' +
@@ -11,7 +12,7 @@ const authUrl = 'https://accounts.spotify.com/authorize?' +
     '&scope=' + scope;
 
 async function start(){
-    if (window.location.href == redirectUri) {
+    if (window.location.href.length <= redirectUri.length) {
         window.location.href = authUrl;
     }
     else {
@@ -49,7 +50,22 @@ async function fetchTopArtists(accessToken) {
     return data.items;
 }
 
+function startPrompt(id) {
+    let start = document.getElementById(id);
+
+    if (window.location.href.length <= redirectUri.length) {
+        start.textContent = "Login to Spotify";
+    }
+    else {
+        start.textContent = "Start";
+    }
+}
+
 ///////////////////////////////////////////////////////////////////////////////
+
+$(document).ready(function() {
+    startPrompt('start');
+});
 
 $('#start').click(function() {
     start();
