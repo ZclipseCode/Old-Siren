@@ -1,5 +1,6 @@
 const consumerKey = import.meta.env.VITE_TM_CONSUMER_KEY;
 var nearbyEvents;
+var genreSubstrings;
 
 async function fetchNearbyEvents(latlong, radius) {
     let size = 200;
@@ -82,6 +83,7 @@ function createEventDiv(imageSrc, name, genre, location, day, time) {
         genreP.textContent = 'N/A';
     }
     else {
+        genre = genre[0].toUpperCase() + genre.slice(1);
         genreP.textContent = genre;
     }
 
@@ -119,11 +121,32 @@ function toStandardTime(militaryTime) {
     else {
       return militaryTime[0] + ':' + militaryTime[1] + ' AM';
     }
-  }
+}
+
+function getGenreSubstrings(genres) {
+    let substrings = new Array();
+    for (let genre of genres) {
+        let subs = genre.genre.split(' ');
+        for (let sub of subs) {
+            substrings.push(sub);
+        }
+    }
+    return substrings;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
+$(document).ready(function() {
+    let genres = JSON.parse(sessionStorage.getItem('genres'));
+    genreSubstrings = getGenreSubstrings(genres);
+});
+
 $('#search').click(async function() {
+    let allEvents = document.getElementById('events');
+    while (allEvents.lastElementChild) {
+        allEvents.removeChild(allEvents.lastElementChild);
+    }
+
     let location = document.getElementById('location').value;
     let radius = document.getElementById('radius').value;
     let isInputValid = radiusInputHandling(radius);
@@ -136,11 +159,19 @@ $('#search').click(async function() {
 
     let dateSettings = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     for (let event of nearbyEvents) {
+        if (event.classifications[0].genre == null) {
+            continue;
+        }
+        let genre = event.classifications[0].genre.name.toLowerCase();
+        if (!genreSubstrings.includes(genre)) {
+            continue;
+        }
+
         let date = new Date(event.dates.start.localDate);
         createEventDiv(
             event.images[0].url,
             event.name,
-            event.classifications[0].genre.name,
+            genre,
             event._embedded.venues[0].name,
             date.toLocaleDateString('en-US', dateSettings),
             toStandardTime(event.dates.start.localTime));

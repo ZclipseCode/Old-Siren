@@ -31,6 +31,10 @@ function setSortedGenres() {
     let genres = Array.from(genreOccurences, ([genre, occurences]) => ({ genre, occurences }));
     sortedGenres = genres.sort(sortGenres);
     sortedGenres.reverse();
+
+    for (let genre of sortedGenres) {
+        genre.genre = genre.genre.toLowerCase();
+    }
 }
 
 function setGenresElement(id) {
