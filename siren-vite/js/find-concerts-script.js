@@ -10,9 +10,6 @@ async function fetchNearbyEvents(latlong, radius) {
     let data = await response.json();
     let events = data._embedded.events || [];
 
-    // for (let event of events) {
-    //     console.log(event.name + ' ' + event.classifications[0].genre.name);
-    // }
     return events;
 }
 
@@ -134,6 +131,16 @@ function getGenreSubstrings(genres) {
     return substrings;
 }
 
+function getCurrentLatLong(position) {
+    let lat = Math.round(position.coords.latitude * 1000) / 1000;
+    let long = Math.round(position.coords.longitude * 1000) / 1000;
+    return lat + ',' + long;
+}
+
+function geolocationError() {
+    alert('Error retrieving location.');
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 $(document).ready(function() {
@@ -155,6 +162,60 @@ $('#search').click(async function() {
         return;
     }
 
+    nearbyEvents = await fetchNearbyEvents(location, radius);
+
+    let dateSettings = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    for (let event of nearbyEvents) {
+        if (event.classifications[0].genre == null) {
+            continue;
+        }
+        let genre = event.classifications[0].genre.name.toLowerCase();
+        if (!genreSubstrings.includes(genre)) {
+            continue;
+        }
+
+        let date = new Date(event.dates.start.localDate);
+        createEventDiv(
+            event.images[0].url,
+            event.name,
+            genre,
+            event._embedded.venues[0].name,
+            date.toLocaleDateString('en-US', dateSettings),
+            toStandardTime(event.dates.start.localTime));
+    }
+});
+
+$('#search-current').click(async function() {
+    if (!navigator.geolocation) {
+        alert('Geolocation services not supported.')
+        return;
+    }
+    let location = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                resolve(getCurrentLatLong(position));
+            },
+            () => {
+                reject(geolocationError);
+            }
+        );
+    });
+    if (!location) {
+        return;
+    }
+
+    let allEvents = document.getElementById('events');
+    while (allEvents.lastElementChild) {
+        allEvents.removeChild(allEvents.lastElementChild);
+    }
+
+    let radius = document.getElementById('radius').value;
+    let isInputValid = radiusInputHandling(radius);
+
+    if (!isInputValid) {
+        return;
+    }
+    
     nearbyEvents = await fetchNearbyEvents(location, radius);
 
     let dateSettings = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
