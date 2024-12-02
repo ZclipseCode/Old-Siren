@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Siren</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="assets/favicon.png" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -15,6 +15,7 @@
 
         <script src="js/jquery-3.7.1.min.js"></script>
         <script src="js/music-taste-script.js" type="module"></script>
+        <script src="js/theme-script.js"></script>
     </head>
     <body id="page-top">
         <!-- Header-->
@@ -33,6 +34,14 @@
         </header>
         <!-- Footer-->
         <footer class="py-5 bg-black">
+            <div class="m-0 text-center text-white small">
+                <label for="theme">Theme:</label>
+                <select id="theme" name="theme">
+                    <option value="sunset">Sunset</option>
+                    <option value="lagoon">Lagoon</option>
+                    <option value="zclipse">Zclipse</option>
+                </select>
+            </div>
             <p class="m-0 text-center text-white small">&copy;<script>document.write(new Date().getFullYear())</script> Brian Michael</p>
         </footer>
         <!-- Bootstrap core JS-->

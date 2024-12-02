@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Siren</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="assets/favicon.png" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -15,49 +15,65 @@
 
         <script src="js/jquery-3.7.1.min.js"></script>
         <script src="js/find-concerts-script.js" type="module"></script>
+        <script src="js/theme-script.js"></script>
     </head>
     <body id="page-top">
         <section>
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="p-5">
-                        <h2 class="display-4">Find concerts near you!</h2>
-                        <form>
-                            <div style="display: flex; align-items: center; justify-content: space-around;">
-                                <div>
-                                    <label for="location">Location:</label>
-                                    <select id="location" name="location">
-                                        <option value="41.878,-87.630">Chicago, IL</option>
-                                        <option value="40.713,-74.006">New York City, NY</option>
-                                        <option value="30.267,-97.743">Austin, TX</option>
-                                        <option value="36.163,-86.782">Nashville, TN</option>
-                                        <option value="34.055,-118.243">Los Angeles, CA</option>
-                                        <option value="37.775,-122.419">San Francisco, CA</option>
-                                        <option value="47.606,-122.333">Seattle, WA</option>
-                                        <option value="42.360,-71.059">Boston, MA</option>
-                                        <option value="35.150,-90.049">Memphis, TN</option>
-                                    </select>
+            <header class="masthead text-center text-white">
+                <div class="container px-5 masthead-content">
+                    <div class="row gx-5 align-items-center">
+                        <div class="p-5">
+                            <h1 class="masthead-heading mb-0">Find concerts near you!</h1>
+                            <h2>Enter a location and radius.</h2>
+                            <form>
+                                <div style="display: flex; align-items: center; justify-content: space-around;">
+                                    <div>
+                                        <label for="location">Location:</label>
+                                        <select id="location" name="location">
+                                            <option value="41.878,-87.630">Chicago, IL</option>
+                                            <option value="40.713,-74.006">New York City, NY</option>
+                                            <option value="30.267,-97.743">Austin, TX</option>
+                                            <option value="36.163,-86.782">Nashville, TN</option>
+                                            <option value="34.055,-118.243">Los Angeles, CA</option>
+                                            <option value="37.775,-122.419">San Francisco, CA</option>
+                                            <option value="47.606,-122.333">Seattle, WA</option>
+                                            <option value="42.360,-71.059">Boston, MA</option>
+                                            <option value="35.150,-90.049">Memphis, TN</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="radius">Radius:</label>
+                                        <input id="radius" type="number" name="radius" value="50">
+                                    </div>
+                                    <div>
+                                        <button id="search" type="button" class="btn btn-dark">Search</button>
+                                    </div>
+                                    <div>
+                                        <button id="search-current" type="button" class="btn btn-dark">Search with Current Location</button>
+                                    </div>
                                 </div>
-                                <div>
-                                    <label for="radius">Radius:</label>
-                                    <input id="radius" type="number" name="radius" value="50">
-                                </div>
-                                <div>
-                                    <button id="search" type="button" class="btn btn-dark">Search</button>
-                                </div>
-                                <div>
-                                    <button id="search-current" type="button" class="btn btn-dark">Search with Current Location</button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
+                        <div id="events"></div>
                     </div>
-                    <div id="events"></div>
                 </div>
-            </div>
+                <div class="bg-circle-1 bg-circle"></div>
+                <div class="bg-circle-2 bg-circle"></div>
+                <div class="bg-circle-3 bg-circle"></div>
+                <div class="bg-circle-4 bg-circle"></div>
+            </header>
         </section>
         <!-- <section style="display: flex; flex=flow: column; height: 100%;"></section> -->
         <!-- Footer-->
         <footer class="py-5 bg-black">
+            <div class="m-0 text-center text-white small">
+                <label for="theme">Theme:</label>
+                <select id="theme" name="theme">
+                    <option value="sunset">Sunset</option>
+                    <option value="lagoon">Lagoon</option>
+                    <option value="zclipse">Zclipse</option>
+                </select>
+            </div>
             <p class="m-0 text-center text-white small">&copy;<script>document.write(new Date().getFullYear())</script> Brian Michael</p>
         </footer>
         <!-- Bootstrap core JS-->
